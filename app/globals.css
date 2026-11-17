@@ -1,0 +1,96 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-primary: #101820;
+  --bg-secondary: #17232D;
+  --surface: #FFFFFF;
+  --accent-gold: #C6A66B;
+  --accent-gold-light: #D9C29A;
+  --text-dark: #18232C;
+  --text-muted: #77818A;
+  --border-light: #E8E8E8;
+  --border-dark: #223240;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    color-scheme: dark light;
+  }
+
+  body {
+    background-color: #101820;
+    color: #F8FAFB;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: #C6A66B;
+    color: #101820;
+  }
+}
+
+/* 3D Perspective & Transform Helpers */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-2000 {
+  perspective: 2000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Luxury gold text gradient */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #EAD7B5 0%, #C6A66B 50%, #B39151 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Subtle luxury card shimmer */
+.luxury-glass {
+  background: rgba(23, 35, 45, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(198, 166, 107, 0.18);
+}
+
+.luxury-glass-light {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(232, 232, 232, 0.9);
+}
+
+/* Smooth custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #101820;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #253443;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #C6A66B;
+}

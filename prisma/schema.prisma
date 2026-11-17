@@ -1,0 +1,65 @@
+// Prisma schema for NovaEstate Properties
+// Powered by Neon Serverless PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Property {
+  id          String    @id @default(cuid())
+  slug        String    @unique
+  title       String
+  description String
+  area        String    // Dubai Marina, Downtown Dubai, Palm Jumeirah, etc.
+  type        String    // Apartment, Villa, Penthouse, Townhouse
+  bedrooms    Int
+  bathrooms   Int
+  price       Float     // Price in AED
+  size        Int       // Size in sq ft
+  status      String    @default("READY") // "READY" or "OFF_PLAN"
+  imageUrl    String
+  images      String    // JSON array of image URLs
+  features    String    // JSON array of key amenities/features
+  featured    Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  enquiries   Enquiry[]
+
+  @@index([area])
+  @@index([type])
+  @@index([price])
+  @@index([bedrooms])
+  @@index([status])
+}
+
+model Enquiry {
+  id         String   @id @default(cuid())
+  name       String
+  email      String
+  phone      String
+  message    String
+  propertyId String
+  property   Property @relation(fields: [propertyId], references: [id], onDelete: Cascade)
+  status     String   @default("NEW") // "NEW", "CONTACTED", "CLOSED"
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([propertyId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model Admin {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         String   @default("ADMIN")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
